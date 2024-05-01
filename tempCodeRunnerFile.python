@@ -1,0 +1,77 @@
+from tkinter import *
+
+# Create the main window
+window = Tk()
+window.title("Registration Form")
+
+# Define functions for handling form submission and gender selection (optional)
+def handle_form_submit():
+  # Get form data and process it here
+  full_name = full_name_entry.get()
+  email = email_entry.get()
+  gender = gender_var.get()
+  country = country_var.get()
+  programming_language = programming_var.get()
+  # Process the data, e.g., print it to the console
+  print(f"Full Name: {full_name}")
+  print(f"Email: {email}")
+  print(f"Gender: {gender}")
+  print(f"Country: {country}")
+  print(f"Programming Language: {programming_language}")
+
+  # Clear the form after submission (optional)
+  full_name_entry.delete(0, END)
+  email_entry.delete(0, END)
+  gender_var.set("")
+  country_var.set("")
+  programming_var.set("")
+
+def handle_gender_select(value):
+  gender_var.set(value)
+
+# Create labels for each form field
+full_name_label = Label(window, text="Full Name:")
+email_label = Label(window, text="Email:")
+gender_label = Label(window, text="Gender:")
+country_label = Label(window, text="Country:")
+programming_label = Label(window, text="Programming Language:")
+
+# Create entry fields for full name and email
+full_name_entry = Entry(window)
+email_entry = Entry(window)
+
+# Create radio buttons for gender selection
+gender_var = StringVar()
+male_radio = Radiobutton(window, text="Male", variable=gender_var, value="Male", command=lambda: handle_gender_select("Male"))
+female_radio = Radiobutton(window, text="Female", variable=gender_var, value="Female", command=lambda: handle_gender_select("Female"))
+
+# Create a dropdown menu for country selection
+countries = ["India", "USA", "China", "Other"]
+country_var = StringVar()
+country_menu = OptionMenu(window, country_var, *countries)
+
+# Create checkboxes for programming language selection
+programming_var = StringVar()
+java_checkbox = Checkbutton(window, text="Java", variable=programming_var, onvalue="Java")
+python_checkbox = Checkbutton(window, text="Python", variable=programming_var, onvalue="Python")
+
+# Create a submit button
+submit_button = Button(window, text="Submit", command=handle_form_submit)
+
+# Use grid layout manager to arrange the widgets
+full_name_label.grid(row=0, column=0, sticky=W)
+full_name_entry.grid(row=0, column=1, columnspan=2)
+email_label.grid(row=1, column=0, sticky=W)
+email_entry.grid(row=1, column=1, columnspan=2)
+gender_label.grid(row=2, column=0, sticky=W)
+male_radio.grid(row=2, column=1)
+female_radio.grid(row=2, column=2)
+country_label.grid(row=3, column=0, sticky=W)
+country_menu.grid(row=3, column=1, columnspan=2)
+programming_label.grid(row=4, column=0, sticky=W)
+java_checkbox.grid(row=4, column=1)
+python_checkbox.grid(row=4, column=2)
+submit_button.grid(row=5, columnspan=3)
+
+# Run the main event loop
+window.mainloop()

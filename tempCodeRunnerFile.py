@@ -1,0 +1,1 @@
+label0.place(x=100, y=10)
